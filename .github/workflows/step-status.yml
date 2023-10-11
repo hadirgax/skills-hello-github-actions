@@ -1,6 +1,11 @@
 name: Conditional Execution Example
 
-on: [push]
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+      - '**'
 
 jobs:
   demo:
