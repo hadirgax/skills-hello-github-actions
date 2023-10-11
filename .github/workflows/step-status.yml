@@ -22,7 +22,7 @@ jobs:
 
   on_failure:
     needs: demo
-    if: always() && steps.demo.conclusion == 'failure'
+    if: always() && ${{steps.demo.conclusion}} == 'failure'
     runs-on: ubuntu-latest
     steps:
       - name: Run on failure
