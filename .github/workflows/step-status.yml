@@ -1,0 +1,26 @@
+name: Conditional Execution Example
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+      - '**'
+
+jobs:
+  init:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      # Here's a demo step that fails intentionally. You can replace it with your actual steps.
+      - name: Run some step
+        id: demo
+        run: |
+          echo "This step will fail"
+          exit 1
+      - name: Run on failure
+        if: ${{always() && steps.demo.conclusion == 'failure'}}
+        run: |
+          echo "Demo job has failed. Running steps for failure case."
